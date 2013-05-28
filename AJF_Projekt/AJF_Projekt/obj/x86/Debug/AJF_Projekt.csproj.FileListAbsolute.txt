@@ -1,0 +1,20 @@
+C:\Documents and Settings\Piotrek\moje dokumenty\visual studio 2010\Projects\AJF_Projekt\AJF_Projekt\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Piotrek\moje dokumenty\visual studio 2010\Projects\AJF_Projekt\AJF_Projekt\obj\x86\Debug\AJF_Projekt.Form1.resources
+C:\Documents and Settings\Piotrek\moje dokumenty\visual studio 2010\Projects\AJF_Projekt\AJF_Projekt\obj\x86\Debug\AJF_Projekt.Properties.Resources.resources
+C:\Documents and Settings\Piotrek\moje dokumenty\visual studio 2010\Projects\AJF_Projekt\AJF_Projekt\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Documents and Settings\Piotrek\moje dokumenty\visual studio 2010\Projects\AJF_Projekt\AJF_Projekt\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Documents and Settings\Piotrek\moje dokumenty\visual studio 2010\Projects\AJF_Projekt\AJF_Projekt\bin\Debug\AJF_Projekt.exe
+C:\Documents and Settings\Piotrek\moje dokumenty\visual studio 2010\Projects\AJF_Projekt\AJF_Projekt\bin\Debug\AJF_Projekt.pdb
+C:\Documents and Settings\Piotrek\moje dokumenty\visual studio 2010\Projects\AJF_Projekt\AJF_Projekt\obj\x86\Debug\AJF_Projekt.exe
+C:\Documents and Settings\Piotrek\moje dokumenty\visual studio 2010\Projects\AJF_Projekt\AJF_Projekt\obj\x86\Debug\AJF_Projekt.pdb
+C:\Users\Piotrek\Documents\Visual Studio 2010\Projects\AJF_Projekt\AJF_Projekt\obj\x86\Debug\AJF_Projekt.exe
+C:\Users\Piotrek\Documents\Visual Studio 2010\Projects\AJF_Projekt\AJF_Projekt\obj\x86\Debug\AJF_Projekt.pdb
+C:\Users\Piotrek\Documents\Visual Studio 2010\Projects\AJF_Projekt\AJF_Projekt\bin\Debug\AJF_Projekt.exe
+C:\Users\Piotrek\Documents\Visual Studio 2010\Projects\AJF_Projekt\AJF_Projekt\bin\Debug\AJF_Projekt.pdb
+C:\Users\Piotrek\Documents\Visual Studio 2010\Projects\AJF_Projekt\AJF_Projekt\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Piotrek\Documents\Visual Studio 2010\Projects\AJF_Projekt\AJF_Projekt\obj\x86\Debug\AJF_Projekt.Form1.resources
+C:\Users\Piotrek\Documents\Visual Studio 2010\Projects\AJF_Projekt\AJF_Projekt\obj\x86\Debug\AJF_Projekt.Properties.Resources.resources
+C:\Users\Piotrek\Documents\Visual Studio 2010\Projects\AJF_Projekt\AJF_Projekt\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Piotrek\Documents\Visual Studio 2010\Projects\AJF_Projekt\AJF_Projekt\obj\x86\Debug\GenerateResource.write.1.tlog
+X:\Dropbox\Studia\Automaty i jezyki formalne\PROJEKT\AJF_Projekt\AJF_Projekt\obj\x86\Debug\AJF_Projekt.exe
+X:\Dropbox\Studia\Automaty i jezyki formalne\PROJEKT\AJF_Projekt\AJF_Projekt\obj\x86\Debug\AJF_Projekt.pdb
