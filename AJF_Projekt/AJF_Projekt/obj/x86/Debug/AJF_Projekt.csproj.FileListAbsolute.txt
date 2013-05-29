@@ -18,3 +18,12 @@ C:\Users\Piotrek\Documents\Visual Studio 2010\Projects\AJF_Projekt\AJF_Projekt\o
 C:\Users\Piotrek\Documents\Visual Studio 2010\Projects\AJF_Projekt\AJF_Projekt\obj\x86\Debug\GenerateResource.write.1.tlog
 X:\Dropbox\Studia\Automaty i jezyki formalne\PROJEKT\AJF_Projekt\AJF_Projekt\obj\x86\Debug\AJF_Projekt.exe
 X:\Dropbox\Studia\Automaty i jezyki formalne\PROJEKT\AJF_Projekt\AJF_Projekt\obj\x86\Debug\AJF_Projekt.pdb
+X:\Dropbox\Studia\Automaty i jezyki formalne\PROJEKT\AJF_Projekt\AJF_Projekt\bin\Debug\AJF_Projekt.exe
+X:\Dropbox\Studia\Automaty i jezyki formalne\PROJEKT\AJF_Projekt\AJF_Projekt\bin\Debug\AJF_Projekt.pdb
+X:\Dropbox\Studia\Automaty i jezyki formalne\PROJEKT\AJF_Projekt\AJF_Projekt\obj\x86\Debug\ResolveAssemblyReference.cache
+X:\Dropbox\Studia\Automaty i jezyki formalne\PROJEKT\AJF_Projekt\AJF_Projekt\obj\x86\Debug\AJF_Projekt.Form1.resources
+X:\Dropbox\Studia\Automaty i jezyki formalne\PROJEKT\AJF_Projekt\AJF_Projekt\obj\x86\Debug\AJF_Projekt.Properties.Resources.resources
+X:\Dropbox\Studia\Automaty i jezyki formalne\PROJEKT\AJF_Projekt\AJF_Projekt\obj\x86\Debug\GenerateResource.read.1.tlog
+X:\Dropbox\Studia\Automaty i jezyki formalne\PROJEKT\AJF_Projekt\AJF_Projekt\obj\x86\Debug\GenerateResource.write.1.tlog
+D:\Dropbox\Studia\Automaty i jezyki formalne\PROJEKT\AJF_Projekt\AJF_Projekt\obj\x86\Debug\AJF_Projekt.exe
+D:\Dropbox\Studia\Automaty i jezyki formalne\PROJEKT\AJF_Projekt\AJF_Projekt\obj\x86\Debug\AJF_Projekt.pdb

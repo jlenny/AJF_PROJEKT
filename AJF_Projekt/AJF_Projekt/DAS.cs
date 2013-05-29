@@ -27,10 +27,54 @@ namespace AJF_Projekt
 
         void algorytm(NDAS_Stan[] st_ndas)
         {
-            for (int i = 0; i < st_ndas.Length; i++)
-            {
-                
-            }
+            var poczatkowy = zwroc_poczatkowy_ndas(st_ndas);
+            
+
         }
+
+//================================ZBOIR POTEGOWY==================================
+        public List<String> zwroc_zbior_potegowy(List<String> sStanyAutomatu)
+        {
+            List<String> powerset = new List<String>();
+            String tmp="";
+            int lng = sStanyAutomatu.Count;
+            for (int i = 0; i < (Math.Pow(2,lng)); i++)
+            {
+                tmp = Convert.ToString(i, 2);
+                tmp = dodaj_zera(tmp, lng);
+                        powerset.Add(zwroc_podzbior(tmp, sStanyAutomatu));
+            }
+            powerset.Sort();
+            return powerset;
+        }
+
+        String zwroc_podzbior(String a, List<String> b)
+        {
+            String s = "{";
+            bool przecinek = true;
+            for (int i = 0; i <a.Length; i++)
+            {
+                if ((a[i] == '1') && (przecinek)) { s += b[i]; przecinek = false; }
+            else if ((a[i] == '1') && (!przecinek)) { s += ","+b[i]; }
+            }
+
+            s += "}";
+            return s;
+        }
+        String dodaj_zera(String s, int length)
+        {
+            String tmp="";
+            if (s.Length < length)
+            {
+                for (int i = s.Length; i < length; i++)
+                {
+                    tmp += "0";
+                }
+                tmp += s;
+                return tmp;
+            }
+            return s;
+        }
+//================================ZBOIR POTEGOWY==================================
     }
 }

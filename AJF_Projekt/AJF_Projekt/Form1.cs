@@ -16,6 +16,7 @@ namespace AJF_Projekt
     {
         String Q = "";
         NDAS_Stan[] stany;
+
         public Form1()
         {
             InitializeComponent();
@@ -33,7 +34,7 @@ namespace AJF_Projekt
                 label1.Text = "Ścieżka: " + openFileDialog1.FileName;
                 StreamReader objReader = new StreamReader(openFileDialog1.FileName);
                 string sLine = "";
-                
+
                 ArrayList arrText = new ArrayList();
                 while (sLine != null)
                 {
@@ -42,20 +43,14 @@ namespace AJF_Projekt
                         arrText.Add(sLine);
                 }
                 objReader.Close();
-                
+
                 Regex rgx = new Regex("(>|\\*)?\\([1-9][0-9]?,[a-j]\\)->\\d+;");
-                foreach(string sOutput in arrText)
-                    Q += sOutput + "\n";
+
+                foreach (string sOutput in arrText) Q += sOutput + "\n";
                 foreach (string sOutput in arrText)
                 {
                     if (rgx.IsMatch(sOutput))
                         listBox1.Items.Add(sOutput);
-                    
-                    if (Regex.IsMatch(sOutput,">\\([1-9][0-9]?,[a-j]\\)->\\d+;"))
-                        l_Stan_poczatkowy.Text="Stan poczatkowy: "+sOutput.Substring(2,1);
-
-                    if (Regex.IsMatch(sOutput, "\\*\\([1-9][0-9]?,[a-j]\\)->\\d+;"))
-                        l_Stan_koncowy.Text = "Stan końcowy: " + sOutput.Substring(2, 1);
                 }
             }
         }
@@ -63,32 +58,36 @@ namespace AJF_Projekt
         List<String> wyszukaj_stany_NDAS(String s)
         {
             List<String> stany = new List<string>();
-            MatchCollection m = Regex.Matches(s,"\\([1-9][0-9]?,");
-            foreach(Match match in m)
+            MatchCollection m = Regex.Matches(s, "\\([1-9][0-9]?,");
+            foreach (Match match in m)
             {
-                if(match.Length==3)
-                stany.Add(match.ToString().Substring(1,1));
+                if (match.Length == 3)
+                    stany.Add(match.ToString().Substring(1, 1));
                 else
-                stany.Add(match.ToString().Substring(1,2));
+                    stany.Add(match.ToString().Substring(1, 2));
             }
             stany = stany.Distinct().ToList();
-      return stany;
+            return stany;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             utworz_stany(wyszukaj_stany_NDAS(Q));
             listBox2.Items.Clear();
-            DAS das=new DAS(stany);
-            foreach (NDAS_Stan st in das.zwroc_stany_ndas())
-                for (int i = 0; i < st.zwroc_ilosc_konfiguracji(); i++)
-                    listBox2.Items.Add(st.zwroc_konfiguracje(i));
+            DAS das = new DAS(stany);
+            foreach (String s in das.zwroc_zbior_potegowy(wyszukaj_stany_NDAS(Q)))
+                listBox2.Items.Add(s);
+            /*
+              foreach (NDAS_Stan st in das.zwroc_stany_ndas())
+                 for (int i = 0; i < st.zwroc_ilosc_konfiguracji(); i++)
+                     listBox2.Items.Add(st.zwroc_konfiguracje(i));
+             */
         }
 
         void utworz_stany(List<String> s)
         {
             s.Sort();
-            stany=new NDAS_Stan[s.Count];
+            stany = new NDAS_Stan[s.Count];
             for (int i = 0; i < s.Count; i++)
                 stany[i] = new NDAS_Stan(s[i], Q);
 
