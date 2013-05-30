@@ -10,6 +10,7 @@ namespace AJF_Projekt
         public DAS(NDAS_Stan[] Ndas_stany)
         {
             this.stany_ndas=new NDAS_Stan[Ndas_stany.Length];
+            
             Ndas_stany.CopyTo(stany_ndas, 0);
         }
         NDAS_Stan[] stany_ndas;
@@ -25,11 +26,40 @@ namespace AJF_Projekt
             return st_ndas[0];
         }
 
-        void algorytm(NDAS_Stan[] st_ndas)
+        NDAS_Stan[] zwroc_koncowe_ndas(NDAS_Stan[] st_ndas)
         {
-            var poczatkowy = zwroc_poczatkowy_ndas(st_ndas);
-            
+            int i = 0;
+            foreach (NDAS_Stan st in st_ndas)
+                if (st.getKoncowy()) i++;
+            NDAS_Stan[] tmp_ndas = new NDAS_Stan[i];
+            i=0;
+            foreach (NDAS_Stan st in st_ndas)
+            {
+                if (st.getKoncowy())
+                {
+                    tmp_ndas[i]=st;
+                    i++;
+                }
+            }
+            return tmp_ndas;
+        }
 
+        public NDAS_Stan[] algorytm(NDAS_Stan[] st_ndas)
+        {
+
+            var poczatkowy = zwroc_poczatkowy_ndas(st_ndas);
+            var koncowe = zwroc_koncowe_ndas(st_ndas);
+            NDAS_Stan[] result = new NDAS_Stan[koncowe.Length + 1];
+            result[0] = poczatkowy;
+            for (int i = 1; i < result.Length; i++)
+            { result[i] = koncowe[i - 1]; }
+         return result;
+        }
+
+        Boolean scout(NDAS_Stan[] st_ndas)
+        {
+            
+            return true;
         }
 
 //================================ZBOIR POTEGOWY==================================
@@ -48,19 +78,20 @@ namespace AJF_Projekt
             return powerset;
         }
 
-        String zwroc_podzbior(String a, List<String> b)
+        String zwroc_podzbior(String aBinReprezentacja, List<String> bStany)
         {
             String s = "{";
             bool przecinek = true;
-            for (int i = 0; i <a.Length; i++)
+            for (int i = 0; i <aBinReprezentacja.Length; i++)
             {
-                if ((a[i] == '1') && (przecinek)) { s += b[i]; przecinek = false; }
-            else if ((a[i] == '1') && (!przecinek)) { s += ","+b[i]; }
+                if ((aBinReprezentacja[i] == '1') && (przecinek)) { s += bStany[i]; przecinek = false; }
+            else if ((aBinReprezentacja[i] == '1') && (!przecinek)) { s += ","+bStany[i]; }
             }
 
             s += "}";
             return s;
         }
+
         String dodaj_zera(String s, int length)
         {
             String tmp="";

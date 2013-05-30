@@ -15,7 +15,7 @@ namespace AJF_Projekt
             ustaw_przejscia(zwroc_przejscia_stanu(sEtykieta, sAutomat));
             
         }
-        String etykieta = "";
+        String etykieta = "";   
         Boolean poczatkowy = false;
         Boolean koncowy = false;  
         List<NDAS_Przejscie> konfiguracja = new List<NDAS_Przejscie>();
@@ -35,7 +35,7 @@ namespace AJF_Projekt
                str += "* ( ";
            else
                str += "( ";
-           str += this.etykieta.ToString()+" , ";
+           str += this.etykieta+" , ";
            str += this.konfiguracja[i].getLitera()+" ) -> ";
            str += this.konfiguracja[i].getCel()+" ;";
            return str;
@@ -43,6 +43,9 @@ namespace AJF_Projekt
 
        public int zwroc_ilosc_konfiguracji()
        { return this.konfiguracja.Count; }
+
+       public String getEtykieta()
+       { return this.etykieta; }
 
        public bool getPoczatkowy()
        { return this.poczatkowy; }
