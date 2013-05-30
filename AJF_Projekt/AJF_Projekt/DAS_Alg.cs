@@ -14,8 +14,8 @@ namespace AJF_Projekt
             Ndas_stany.CopyTo(stany_ndas, 0);
         }
         NDAS_Stan[] stany_ndas;
-        List<String> stany_das = new List<string>();
-
+        DAS_Stan[] tmp_das;
+        List<DAS_Stan> stan_das = new List<DAS_Stan>();
         public NDAS_Stan[] zwroc_stany_ndas()
         { return stany_ndas; }
 
@@ -50,11 +50,29 @@ namespace AJF_Projekt
             var poczatkowy = zwroc_poczatkowy_ndas(st_ndas);
             var koncowe = zwroc_koncowe_ndas(st_ndas);
             List<String> result = new List<string>();
-            result.Add(poczatkowy.getEtykieta());
-            for (int i = 0; i < koncowe.Length; i++)
-            { result.Add(koncowe[i].getEtykieta()); }
-            return result;
+            
+            stan_das.Add(new DAS_Stan(poczatkowy.getEtykieta(),st_ndas.Length));
+            stan_das[0].setPoczatkowy(true);
+            stan_das[0].setIstnieje(true);
+            
+            String etykieta_das = "";
+            String cele_string = "";
+            String tmp = "";
+
+
+                
+                result.Add(poczatkowy.getEtykieta());
+                for (int i = 0; i < koncowe.Length; i++)
+                { result.Add(koncowe[i].getEtykieta()); }
+                
+                return result;
         }
+
+        public void setIlosc_stanow_das(int rozmiar)
+        { this.tmp_das = new DAS_Stan[rozmiar]; }
+
+        public String zwroc_stan_das(int n)
+        { return this.stan_das[n].zwroc_stan(); }
 
         Boolean scout(NDAS_Stan[] st_ndas)
         {
@@ -87,8 +105,10 @@ namespace AJF_Projekt
                 if ((aBinReprezentacja[i] == '1') && (przecinek)) { s += bStany[i]; przecinek = false; }
                 else if ((aBinReprezentacja[i] == '1') && (!przecinek)) { s += "," + bStany[i]; }
             }
-
-            s += "}";
+            if(przecinek)
+            s += "0}";
+            else
+                s += "}";
             return s;
         }
 

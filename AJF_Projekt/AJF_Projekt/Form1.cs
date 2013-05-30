@@ -67,6 +67,7 @@ namespace AJF_Projekt
                     stany.Add(match.ToString().Substring(1, 2));
             }
             stany = stany.Distinct().ToList();
+            stany=odrzuc_stany_nieosiagalne(stany, s);
             stany.Sort();
             return stany;
         }
@@ -76,9 +77,13 @@ namespace AJF_Projekt
             utworz_stany(wyszukaj_stany_NDAS(Q));
             listBox2.Items.Clear();
             das = new DAS_Alg(stany);
+            das.setIlosc_stanow_das(stany.Length);
 
             foreach (String s in das.zwroc_zbior_potegowy(wyszukaj_stany_NDAS(Q)))
+            {
                 listBox2.Items.Add(s);
+                
+            }
 
             /*
               foreach (NDAS_Stan st in das.zwroc_stany_ndas())
@@ -96,11 +101,26 @@ namespace AJF_Projekt
 
         }
 
+        List<String> odrzuc_stany_nieosiagalne(List<String> str, String sQ)
+        {
+            List<String> tmp = str;
+            for (int i = str.Count - 1; i >= 0;i--)
+            {
+
+                MatchCollection m = Regex.Matches(sQ, "(>|\\*)?\\([1-9][0-9]?,[a-j]\\)->[" + str[i] + "];");
+                if (m.Count == 0)
+                { tmp.RemoveAt(i); }
+
+            }
+
+            return tmp;
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
             listBox2.Items.Clear();
             var pk = das.algorytm(stany);
-            l_Stan_poczatkowy.Text = "Stan początkowy: {" + pk[0] + "}";
+            l_Stan_poczatkowy_NDAS.Text = "Stan początkowy: {" + pk[0] + "}";
             listBox2.Items.Add("> {" + pk[0] + "}");
             l_Stan_koncowy.Text = "Stan(y) końcowy: ";
             for (int i = 1; i < pk.Count; i++)
@@ -108,6 +128,11 @@ namespace AJF_Projekt
                 l_Stan_koncowy.Text += "{" + pk[i] + "} ";
                 listBox2.Items.Add("* {" + pk[i] + "} ");
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            l_Stan_poczatkowy_DAS.Text = "Początkowy: " + das.zwroc_stan_das(0);
         }
     }
 }
