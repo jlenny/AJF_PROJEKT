@@ -7,22 +7,22 @@ namespace AJF_Projekt
 {
     class NDAS_Przejscie
     {
-       public NDAS_Przejscie(String sEtykieta_cel, String sLitera)
+        public NDAS_Przejscie(String sEtykieta_cel, String sLitera)
         {
             for (int i = 0; i < 10; i++) this.konfiguracja_litera[i] = false;
-                this.etykieta_cel = sEtykieta_cel;
-                this.konfiguracja_litera[zwroc_numer_litery(sLitera)] = true;
+            this.etykieta_cel = sEtykieta_cel;
+            this.konfiguracja_litera[zwroc_numer_litery(sLitera)] = true;
         }
-//===============================ATRYBUTY==================================
-        
+        //===============================ATRYBUTY==================================
+
         Boolean[] konfiguracja_litera = new Boolean[10];
 
         String etykieta_cel = "";
-        static String[] konfiguracja_stan = {"a","b","c","d","e","f","g","h","i","j"};
-        
-//=============================!ATRYBUTY!==================================
+        static String[] konfiguracja_stan = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j" };
 
-//==============================METODY=====================================
+        //=============================!ATRYBUTY!==================================
+
+        //==============================METODY=====================================
         public String getCel()
         { return this.etykieta_cel; }
 
@@ -40,7 +40,7 @@ namespace AJF_Projekt
 
         private int zwroc_numer_litery(String s)
         {
-            switch (s) 
+            switch (s)
             {
                 case "a": return 0;
                 case "b": return 1;
@@ -55,6 +55,6 @@ namespace AJF_Projekt
                 default: return 10;
             }
         }
-//===========================!METODY!======================================
+        //===========================!METODY!======================================
     }
 }

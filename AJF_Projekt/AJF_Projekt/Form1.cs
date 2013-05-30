@@ -16,7 +16,7 @@ namespace AJF_Projekt
     {
         String Q = "";
         NDAS_Stan[] stany;
-
+        DAS_Alg das;
         public Form1()
         {
             InitializeComponent();
@@ -31,7 +31,7 @@ namespace AJF_Projekt
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                label1.Text = "Ścieżka: " + openFileDialog1.FileName;
+                l_Sciezka_NDAS.Text = "Ścieżka: " + openFileDialog1.FileName;
                 StreamReader objReader = new StreamReader(openFileDialog1.FileName);
                 string sLine = "";
 
@@ -44,7 +44,7 @@ namespace AJF_Projekt
                 }
                 objReader.Close();
 
-                Regex rgx = new Regex("(>|\\*)?\\([1-9][0-9]?,[a-j]\\)->\\d+;");
+                Regex rgx = new Regex("(>|\\*)?\\([1-9][0-9]?,[a-j]\\)->\\d+;$");
 
                 foreach (string sOutput in arrText)
                 {
@@ -67,6 +67,7 @@ namespace AJF_Projekt
                     stany.Add(match.ToString().Substring(1, 2));
             }
             stany = stany.Distinct().ToList();
+            stany.Sort();
             return stany;
         }
 
@@ -74,9 +75,11 @@ namespace AJF_Projekt
         {
             utworz_stany(wyszukaj_stany_NDAS(Q));
             listBox2.Items.Clear();
-            DAS das = new DAS(stany);
+            das = new DAS_Alg(stany);
+
             foreach (String s in das.zwroc_zbior_potegowy(wyszukaj_stany_NDAS(Q)))
                 listBox2.Items.Add(s);
+
             /*
               foreach (NDAS_Stan st in das.zwroc_stany_ndas())
                  for (int i = 0; i < st.zwroc_ilosc_konfiguracji(); i++)
@@ -91,6 +94,20 @@ namespace AJF_Projekt
             for (int i = 0; i < s.Count; i++)
                 stany[i] = new NDAS_Stan(s[i], Q);
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            listBox2.Items.Clear();
+            var pk = das.algorytm(stany);
+            l_Stan_poczatkowy.Text = "Stan początkowy: {" + pk[0] + "}";
+            listBox2.Items.Add("> {" + pk[0] + "}");
+            l_Stan_koncowy.Text = "Stan(y) końcowy: ";
+            for (int i = 1; i < pk.Count; i++)
+            {
+                l_Stan_koncowy.Text += "{" + pk[i] + "} ";
+                listBox2.Items.Add("* {" + pk[i] + "} ");
+            }
         }
     }
 }
