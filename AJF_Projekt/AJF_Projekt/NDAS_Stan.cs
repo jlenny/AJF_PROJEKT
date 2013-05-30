@@ -12,14 +12,36 @@ namespace AJF_Projekt
         public NDAS_Stan(String sEtykieta, String sAutomat)
         {
             this.etykieta = sEtykieta;
-            ustaw_przejscia(zwroc_przejscia_stanu(sEtykieta, sAutomat));
+            try
+            {
+                ustaw_przejscia(zwroc_przejscia_stanu(sEtykieta, sAutomat));
+            }
+            catch (Exception)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    this.konfiguracja.Add(new NDAS_Przejscie("0",konfiguracja_stan[i]));
+                }
+            }
+                
+                this.automat = sAutomat;
+        }
 
+        public NDAS_Stan[] zwroc_konkretne_stany(String str)
+        {
+            String[] sa = str.Split(new Char[] { '{', ',', '}' });
+            NDAS_Stan[] tmp = new NDAS_Stan[sa.Length];
+            for(int i=0;i<sa.Length;i++)
+            { tmp[i] = new NDAS_Stan(sa[i], this.automat); }
+
+            return tmp;
         }
         String etykieta = "";
         Boolean poczatkowy = false;
         Boolean koncowy = false;
+        static String[] konfiguracja_stan = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j" };
         List<NDAS_Przejscie> konfiguracja = new List<NDAS_Przejscie>();
-
+        String automat = "";
         public bool dodaj_konfiguracje(String sEtykieta_cel, String sLitera)
         {
             this.konfiguracja.Add(new NDAS_Przejscie(sEtykieta_cel, sLitera));
@@ -39,6 +61,11 @@ namespace AJF_Projekt
             str += this.konfiguracja[i].getLitera() + " ) -> ";
             str += this.konfiguracja[i].getCel() + " ;";
             return str;
+        }
+
+        public List<NDAS_Przejscie> zwroc_przejscia_stanu()
+        {
+            return this.konfiguracja;
         }
 
         public int zwroc_ilosc_konfiguracji()

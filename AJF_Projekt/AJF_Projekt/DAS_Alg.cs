@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace AJF_Projekt
 {
@@ -50,22 +51,80 @@ namespace AJF_Projekt
             var poczatkowy = zwroc_poczatkowy_ndas(st_ndas);
             var koncowe = zwroc_koncowe_ndas(st_ndas);
             List<String> result = new List<string>();
-            
-            stan_das.Add(new DAS_Stan(poczatkowy.getEtykieta(),st_ndas.Length));
+
+            stan_das.Add(new DAS_Stan(poczatkowy.getEtykieta(), st_ndas.Length));
             stan_das[0].setPoczatkowy(true);
             stan_das[0].setIstnieje(true);
-            
+            stan_das[0] = znajdz_przejscia(stan_das[0]);
             String etykieta_das = "";
             String cele_string = "";
             String tmp = "";
 
 
-                
-                result.Add(poczatkowy.getEtykieta());
-                for (int i = 0; i < koncowe.Length; i++)
-                { result.Add(koncowe[i].getEtykieta()); }
-                
-                return result;
+
+            result.Add(poczatkowy.getEtykieta());
+            for (int i = 0; i < koncowe.Length; i++)
+            { result.Add(koncowe[i].getEtykieta()); }
+
+            return result;
+        }
+
+        DAS_Stan znajdz_przejscia(DAS_Stan das)
+        {
+            String[] str = das.getEtykieta().Split(new Char[] { '{', ',', '}' });
+            
+            NDAS_Stan[] tmp_ndas = new NDAS_Stan[str.Length];
+            int l = 0;
+            String x = "";
+            foreach (String st in str)
+                for (int i = 0; i < stany_ndas.Length; i++)
+                    if (st == stany_ndas[i].getEtykieta())
+                    {
+                        tmp_ndas[l] = stany_ndas[i];
+                        x += tmp_ndas[l].getEtykieta() + " | " + tmp_ndas[l].zwroc_ilosc_konfiguracji() + "\n";
+                        MessageBox.Show(generuj_stan_das(tmp_ndas, 0));
+                        l++;
+                    }
+            MessageBox.Show(x);
+            for (int i = 0; i < 10;i++ )
+            { das.ustaw_przejscia(tmp_ndas[0].zwroc_konkretne_stany(generuj_stan_das(tmp_ndas, i)),i); }
+            return das;
+        }
+
+        String generuj_stan_das(NDAS_Stan[] ndas, int iLitera)
+        {
+            List<String> result = new List<String>();
+            String str = "";
+            foreach (NDAS_Stan st in ndas)
+            {
+                foreach (NDAS_Przejscie p in st.zwroc_przejscia_stanu())
+                {
+                    if (p.getLitera() == p.zwroc_litere(iLitera))
+                    {
+                        result.Add(p.getCel());
+                    }
+                }
+            }
+            Boolean przecinek = false;
+            result.Sort();
+            if (result.Count > 0)
+            {
+                foreach (String p in result)
+                {
+                    if (!przecinek)
+                    {
+                        str += "{" + p;
+                        przecinek = true;
+                    }
+                    else
+                    {
+                        str += "," + p;
+                    }
+                }
+                str += "}";
+            }
+            else str = "{0}";
+            return str;
         }
 
         public void setIlosc_stanow_das(int rozmiar)
@@ -105,8 +164,8 @@ namespace AJF_Projekt
                 if ((aBinReprezentacja[i] == '1') && (przecinek)) { s += bStany[i]; przecinek = false; }
                 else if ((aBinReprezentacja[i] == '1') && (!przecinek)) { s += "," + bStany[i]; }
             }
-            if(przecinek)
-            s += "0}";
+            if (przecinek)
+                s += "0}";
             else
                 s += "}";
             return s;
