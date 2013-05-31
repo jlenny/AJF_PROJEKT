@@ -31,7 +31,6 @@ namespace AJF_Projekt
             for (int l = 0; l < ilosc_stanow_ndas-1; l++)
             {
                 this.cel_przejscia[i,l] = str[l];
-                
             }
         }
 
@@ -73,14 +72,14 @@ namespace AJF_Projekt
                     Boolean przecinek = false;
                     for (int l = 0; l < ilosc_stanow_ndas; l++)
                     {
-                        if ((this.cel_przejscia[i, l] != null) && !przecinek)
+                        if ((this.cel_przejscia[i, l] != null) && !przecinek && this.cel_przejscia[i,l].getEtykieta()!="")
                         {
                             str += this.cel_przejscia[i, l].getEtykieta(); przecinek = true;
                         }
-                        else if ((this.cel_przejscia[i, l] != null) && przecinek)
+                        else if ((this.cel_przejscia[i, l] != null) && przecinek && this.cel_przejscia[i, l].getEtykieta() != "")
                         { str += "," + this.cel_przejscia[i, l].getEtykieta(); }
                     }
-                    str += "} ";
+                    str += "}";
                 }
                 else { str += " - {0}"; }
             }

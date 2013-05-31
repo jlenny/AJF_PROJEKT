@@ -132,7 +132,9 @@ namespace AJF_Projekt
 
         private void button3_Click(object sender, EventArgs e)
         {
-            l_Stan_poczatkowy_DAS.Text = "Początkowy: " + das.zwroc_stan_das(0);
+            l_Stan_poczatkowy_DAS.Text = "Początkowy: " + das.zwroc_stan_das(0)+"\n";
+            for(int i=0;i<stany.Length;i++)
+            { listBox3.Items.Add(das.zwroc_stan_das(i)); }
         }
     }
 }

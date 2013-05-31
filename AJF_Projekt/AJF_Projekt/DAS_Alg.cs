@@ -51,16 +51,21 @@ namespace AJF_Projekt
             var poczatkowy = zwroc_poczatkowy_ndas(st_ndas);
             var koncowe = zwroc_koncowe_ndas(st_ndas);
             List<String> result = new List<string>();
-
+            List<String> ls = new List<String>();
+            ls.Add("1"); ls.Add("2"); ls.Add("3"); ls.Add("4");
+ 
             stan_das.Add(new DAS_Stan(poczatkowy.getEtykieta(), st_ndas.Length));
+
             stan_das[0].setPoczatkowy(true);
             stan_das[0].setIstnieje(true);
             stan_das[0] = znajdz_przejscia(stan_das[0]);
-            String etykieta_das = "";
-            String cele_string = "";
-            String tmp = "";
 
-
+            var alfa=zwroc_zbior_potegowy(ls);
+            for (int i = 1; i < (2 ^ ls.Count); i++)
+            {
+                stan_das.Add(new DAS_Stan(alfa[i], st_ndas.Length));
+                stan_das[i] = znajdz_przejscia(stan_das[i]);
+            }
 
             result.Add(poczatkowy.getEtykieta());
             for (int i = 0; i < koncowe.Length; i++)
@@ -71,9 +76,9 @@ namespace AJF_Projekt
 
         DAS_Stan znajdz_przejscia(DAS_Stan das)
         {
-            String[] str = das.getEtykieta().Split(new Char[] { '{', ',', '}' });
-            
-            NDAS_Stan[] tmp_ndas = new NDAS_Stan[str.Length];
+            List<String> str = das.getEtykieta().Split(new Char[] { '{', ',', '}' }).ToList<String>();
+            while(str.Remove(""));
+            NDAS_Stan[] tmp_ndas = new NDAS_Stan[str.Count];
             int l = 0;
             String x = "";
             foreach (String st in str)
@@ -82,10 +87,10 @@ namespace AJF_Projekt
                     {
                         tmp_ndas[l] = stany_ndas[i];
                         x += tmp_ndas[l].getEtykieta() + " | " + tmp_ndas[l].zwroc_ilosc_konfiguracji() + "\n";
-                        MessageBox.Show(generuj_stan_das(tmp_ndas, 0));
+                       // MessageBox.Show(generuj_stan_das(tmp_ndas, 0));
                         l++;
                     }
-            MessageBox.Show(x);
+           // MessageBox.Show(x);
             for (int i = 0; i < 10;i++ )
             { das.ustaw_przejscia(tmp_ndas[0].zwroc_konkretne_stany(generuj_stan_das(tmp_ndas, i)),i); }
             return das;
@@ -105,10 +110,11 @@ namespace AJF_Projekt
                     }
                 }
             }
-            Boolean przecinek = false;
+            
             result.Sort();
             if (result.Count > 0)
             {
+                Boolean przecinek = false;
                 foreach (String p in result)
                 {
                     if (!przecinek)

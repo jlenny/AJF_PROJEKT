@@ -41,6 +41,7 @@
             this.gBoxDAS = new System.Windows.Forms.GroupBox();
             this.l_Stan_poczatkowy_DAS = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
+            this.listBox3 = new System.Windows.Forms.ListBox();
             this.gBoxNDAS.SuspendLayout();
             this.gBoxDAS.SuspendLayout();
             this.SuspendLayout();
@@ -138,10 +139,11 @@
             // 
             // gBoxDAS
             // 
+            this.gBoxDAS.Controls.Add(this.listBox3);
             this.gBoxDAS.Controls.Add(this.l_Stan_poczatkowy_DAS);
             this.gBoxDAS.Location = new System.Drawing.Point(12, 156);
             this.gBoxDAS.Name = "gBoxDAS";
-            this.gBoxDAS.Size = new System.Drawing.Size(519, 182);
+            this.gBoxDAS.Size = new System.Drawing.Size(519, 380);
             this.gBoxDAS.TabIndex = 6;
             this.gBoxDAS.TabStop = false;
             this.gBoxDAS.Text = "DAS";
@@ -165,11 +167,19 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // listBox3
+            // 
+            this.listBox3.FormattingEnabled = true;
+            this.listBox3.Location = new System.Drawing.Point(6, 175);
+            this.listBox3.Name = "listBox3";
+            this.listBox3.Size = new System.Drawing.Size(507, 199);
+            this.listBox3.TabIndex = 1;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(669, 351);
+            this.ClientSize = new System.Drawing.Size(669, 548);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.gBoxDAS);
             this.Controls.Add(this.button2);
@@ -203,6 +213,7 @@
         private System.Windows.Forms.GroupBox gBoxDAS;
         private System.Windows.Forms.Label l_Stan_poczatkowy_DAS;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ListBox listBox3;
     }
 }
 
