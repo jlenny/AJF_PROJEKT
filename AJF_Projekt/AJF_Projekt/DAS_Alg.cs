@@ -52,8 +52,8 @@ namespace AJF_Projekt
             var koncowe = zwroc_koncowe_ndas(st_ndas);
             List<String> result = new List<string>();
             List<String> ls = new List<String>();
-            ls.Add("1"); ls.Add("2"); ls.Add("3"); ls.Add("4");
- 
+            foreach (NDAS_Stan st in st_ndas)
+            { ls.Add(st.getEtykieta()); }
             stan_das.Add(new DAS_Stan(poczatkowy.getEtykieta(), st_ndas.Length));
 
             stan_das[0].setPoczatkowy(true);
@@ -61,7 +61,7 @@ namespace AJF_Projekt
             stan_das[0] = znajdz_przejscia(stan_das[0]);
 
             var alfa=zwroc_zbior_potegowy(ls);
-            for (int i = 1; i < (2 ^ ls.Count); i++)
+            for (int i = 1; i < alfa.Count; i++)
             {
                 stan_das.Add(new DAS_Stan(alfa[i], st_ndas.Length));
                 stan_das[i] = znajdz_przejscia(stan_das[i]);
@@ -100,11 +100,28 @@ namespace AJF_Projekt
         {
             List<String> result = new List<String>();
             String str = "";
+            String litera="";
+            switch (iLitera)
+            {
+                case 0: litera="a"; break;
+                case 1: litera="b"; break;
+                case 2: litera="c"; break;
+                case 3: litera= "d"; break;
+                case 4: litera= "e"; break;
+                case 5: litera= "f"; break;
+                case 6: litera= "g"; break;
+                case 7: litera= "h"; break;
+                case 8: litera= "i"; break;
+                case 9: litera= "j"; break;
+                default: return "k";
+            }
             foreach (NDAS_Stan st in ndas)
             {
+                int licznik = 0;
                 foreach (NDAS_Przejscie p in st.zwroc_przejscia_stanu())
                 {
-                    if (p.getLitera() == p.zwroc_litere(iLitera))
+                    licznik++;
+                    if ((p.getLitera() == litera) && p.getCel() != "0")
                     {
                         result.Add(p.getCel());
                     }
@@ -112,6 +129,7 @@ namespace AJF_Projekt
             }
             
             result.Sort();
+            result=result.Distinct().ToList();
             if (result.Count > 0)
             {
                 Boolean przecinek = false;
@@ -133,8 +151,8 @@ namespace AJF_Projekt
             return str;
         }
 
-        public void setIlosc_stanow_das(int rozmiar)
-        { this.tmp_das = new DAS_Stan[rozmiar]; }
+        public int getIlosc_stanow_das()
+        { return this.stan_das.Count; }
 
         public String zwroc_stan_das(int n)
         { return this.stan_das[n].zwroc_stan(); }

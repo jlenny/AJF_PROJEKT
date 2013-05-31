@@ -28,9 +28,13 @@ namespace AJF_Projekt
 
         public void ustaw_przejscia(NDAS_Stan[] str, int i)
         {
-            for (int l = 0; l < ilosc_stanow_ndas-1; l++)
+            for (int l = 0; l < str.Length; l++)
             {
-                this.cel_przejscia[i,l] = str[l];
+                try
+                {
+                    this.cel_przejscia[i, l] = str[l];
+                }
+                catch (Exception) { }
             }
         }
 

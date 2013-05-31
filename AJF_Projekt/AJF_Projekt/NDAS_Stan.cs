@@ -27,9 +27,17 @@ namespace AJF_Projekt
                 this.automat = sAutomat;
         }
 
+        private static bool dopasuj(String s)
+        {
+            return s.Equals("");
+        }
+
         public NDAS_Stan[] zwroc_konkretne_stany(String str)
         {
-            String[] sa = str.Split(new Char[] { '{', ',', '}' });
+            List<String> tmp_list = new List<string>(str.Split(new Char[] { '{', ',', '}' }));
+            tmp_list.RemoveAll(dopasuj);
+            String[] sa = new String[tmp_list.Count];
+            for (int i = 0; i < tmp_list.Count; i++) { sa[i] = tmp_list[i]; }
             NDAS_Stan[] tmp = new NDAS_Stan[sa.Length];
             for(int i=0;i<sa.Length;i++)
             { tmp[i] = new NDAS_Stan(sa[i], this.automat); }

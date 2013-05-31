@@ -55,7 +55,7 @@ namespace AJF_Projekt
             }
         }
 
-        List<String> wyszukaj_stany_NDAS(String s)
+        public List<String> wyszukaj_stany_NDAS(String s)
         {
             List<String> stany = new List<string>();
             MatchCollection m = Regex.Matches(s, "\\([1-9][0-9]?,");
@@ -77,7 +77,7 @@ namespace AJF_Projekt
             utworz_stany(wyszukaj_stany_NDAS(Q));
             listBox2.Items.Clear();
             das = new DAS_Alg(stany);
-            das.setIlosc_stanow_das(stany.Length);
+            //das.setIlosc_stanow_das(stany.Length);
 
             foreach (String s in das.zwroc_zbior_potegowy(wyszukaj_stany_NDAS(Q)))
             {
@@ -109,10 +109,13 @@ namespace AJF_Projekt
 
                 MatchCollection m = Regex.Matches(sQ, "(>|\\*)?\\([1-9][0-9]?,[a-j]\\)->[" + str[i] + "];");
                 if (m.Count == 0)
-                { tmp.RemoveAt(i); }
+                {
+                    m = Regex.Matches(sQ,">\\("+str[i]+",[a-j]\\)->[0-9][0-9]?;");
+                    if(m.Count==0)
+                    tmp.RemoveAt(i); 
+                }
 
             }
-
             return tmp;
         }
 
@@ -133,8 +136,7 @@ namespace AJF_Projekt
         private void button3_Click(object sender, EventArgs e)
         {
             l_Stan_poczatkowy_DAS.Text = "Początkowy: " + das.zwroc_stan_das(0)+"\n";
-            for(int i=0;i<stany.Length;i++)
-            { listBox3.Items.Add(das.zwroc_stan_das(i)); }
+            for (int i = 0; i < das.getIlosc_stanow_das(); i++) { listBox3.Items.Add(das.zwroc_stan_das(i)); }
         }
     }
 }
