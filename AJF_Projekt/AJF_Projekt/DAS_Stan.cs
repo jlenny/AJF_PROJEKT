@@ -19,7 +19,6 @@ namespace AJF_Projekt
         Boolean istnieje = false;
         Boolean poczatkowy = false;
         Boolean koncowy = false;
-
         public NDAS_Stan[,] getCel_przejscia()
         { return this.cel_przejscia; }
 
@@ -53,22 +52,39 @@ namespace AJF_Projekt
         public void setIstnieje(Boolean Istnieje_bool)
         { this.istnieje = Istnieje_bool; }
 
-        public void setPoczatkowy(Boolean Poczatkowy_bool)
-        { this.poczatkowy = Poczatkowy_bool; }
+        public void setPoczatkowy(NDAS_Stan Poczatkowy)
+        {
+            List<String> tmp_list = new List<String>();
+            tmp_list.AddRange(this.getEtykieta().Split(new Char[] { '{', ',', '}' }));
+            foreach (String s in tmp_list)
+                    if (Poczatkowy.getEtykieta() == s)
+                    {
+                        this.poczatkowy = true; break;
+                    }
+        }
 
-        public void setKoncowy(Boolean Koncowy_bool)
-        { this.koncowy = Koncowy_bool; }
+        public void setKoncowy(NDAS_Stan[] Koncowy)
+        {
+            List<String> tmp_list = new List<String>();
+            tmp_list.AddRange(this.getEtykieta().Split(new Char[] { '{', ',', '}' }));
+            for (int i = 0; i < Koncowy.Length;i++ )
+                foreach(String s in tmp_list)
+                    if (Koncowy[i].getEtykieta() == s)
+                    {
+                        this.koncowy = true; break;
+                    }
+        }
 
         public String zwroc_stan()
         {
             String str;
-            if(this.getPoczatkowy())
-            str=">["+this.etykieta+"]";
-            else if(this.getKoncowy())
-                str = "*[" + this.etykieta + "]";
-            else str = "[" + this.etykieta + "]";
+            if (this.getPoczatkowy())
+                str = ">" + this.etykieta + "";
+            else if (this.getKoncowy())
+                str = "*" + this.etykieta + "";
+            else str = "" + this.etykieta + "";
 
-            for (int i = 0; i < 10;i++ )
+            for (int i = 0; i < 10; i++)
             {
                 if (sprawdz_czy_null(i))
                 {
@@ -76,7 +92,7 @@ namespace AJF_Projekt
                     Boolean przecinek = false;
                     for (int l = 0; l < ilosc_stanow_ndas; l++)
                     {
-                        if ((this.cel_przejscia[i, l] != null) && !przecinek && this.cel_przejscia[i,l].getEtykieta()!="")
+                        if ((this.cel_przejscia[i, l] != null) && !przecinek && this.cel_przejscia[i, l].getEtykieta() != "")
                         {
                             str += this.cel_przejscia[i, l].getEtykieta(); przecinek = true;
                         }
@@ -87,6 +103,29 @@ namespace AJF_Projekt
                 }
                 else { str += " - {0}"; }
             }
+            return str;
+        }
+
+        public String zwroc_stan(int i)
+        {
+            String str = "";
+            if (sprawdz_czy_null(i))
+            {
+                str += " - {";
+                Boolean przecinek = false;
+                for (int l = 0; l < ilosc_stanow_ndas; l++)
+                {
+                    if ((this.cel_przejscia[i, l] != null) && !przecinek && this.cel_przejscia[i, l].getEtykieta() != "")
+                    {
+                        str += this.cel_przejscia[i, l].getEtykieta(); przecinek = true;
+                    }
+                    else if ((this.cel_przejscia[i, l] != null) && przecinek && this.cel_przejscia[i, l].getEtykieta() != "")
+                    { str += "," + this.cel_przejscia[i, l].getEtykieta(); }
+                }
+                str += "}";
+            }
+            else { str += " - {0}"; }
+
             return str;
         }
 

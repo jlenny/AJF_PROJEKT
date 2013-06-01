@@ -67,7 +67,7 @@ namespace AJF_Projekt
                     stany.Add(match.ToString().Substring(1, 2));
             }
             stany = stany.Distinct().ToList();
-            stany=odrzuc_stany_nieosiagalne(stany, s);
+            stany = odrzuc_stany_nieosiagalne(stany, s);
             stany.Sort();
             return stany;
         }
@@ -82,7 +82,7 @@ namespace AJF_Projekt
             foreach (String s in das.zwroc_zbior_potegowy(wyszukaj_stany_NDAS(Q)))
             {
                 listBox2.Items.Add(s);
-                
+
             }
 
             /*
@@ -104,15 +104,15 @@ namespace AJF_Projekt
         List<String> odrzuc_stany_nieosiagalne(List<String> str, String sQ)
         {
             List<String> tmp = str;
-            for (int i = str.Count - 1; i >= 0;i--)
+            for (int i = str.Count - 1; i >= 0; i--)
             {
 
                 MatchCollection m = Regex.Matches(sQ, "(>|\\*)?\\([1-9][0-9]?,[a-j]\\)->[" + str[i] + "];");
                 if (m.Count == 0)
                 {
-                    m = Regex.Matches(sQ,">\\("+str[i]+",[a-j]\\)->[0-9][0-9]?;");
-                    if(m.Count==0)
-                    tmp.RemoveAt(i); 
+                    m = Regex.Matches(sQ, ">\\(" + str[i] + ",[a-j]\\)->[0-9][0-9]?;");
+                    if (m.Count == 0)
+                        tmp.RemoveAt(i);
                 }
 
             }
@@ -123,19 +123,19 @@ namespace AJF_Projekt
         {
             listBox2.Items.Clear();
             var pk = das.algorytm(stany);
-            l_Stan_poczatkowy_NDAS.Text = "Stan początkowy: {" + pk[0] + "}";
-            listBox2.Items.Add("> {" + pk[0] + "}");
+            l_Stan_poczatkowy_NDAS.Text = "Stan początkowy: [" + pk[0] + "]";
+            listBox2.Items.Add("> [" + pk[0] + "]");
             l_Stan_koncowy.Text = "Stan(y) końcowy: ";
             for (int i = 1; i < pk.Count; i++)
             {
-                l_Stan_koncowy.Text += "{" + pk[i] + "} ";
-                listBox2.Items.Add("* {" + pk[i] + "} ");
+                l_Stan_koncowy.Text += "[" + pk[i] + "] ";
+                listBox2.Items.Add("* [" + pk[i] + "] ");
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            l_Stan_poczatkowy_DAS.Text = "Początkowy: " + das.zwroc_stan_das(0)+"\n";
+            l_Stan_poczatkowy_DAS.Text = "Początkowy: " + das.zwroc_stan_das(0) + "\n";
             for (int i = 0; i < das.getIlosc_stanow_das(); i++) { listBox3.Items.Add(das.zwroc_stan_das(i)); }
         }
     }

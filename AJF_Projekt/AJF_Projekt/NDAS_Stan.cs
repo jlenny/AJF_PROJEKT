@@ -20,11 +20,11 @@ namespace AJF_Projekt
             {
                 for (int i = 0; i < 10; i++)
                 {
-                    this.konfiguracja.Add(new NDAS_Przejscie("0",konfiguracja_stan[i]));
+                    this.konfiguracja.Add(new NDAS_Przejscie("0", konfiguracja_stan[i]));
                 }
             }
-                
-                this.automat = sAutomat;
+
+            this.automat = sAutomat;
         }
 
         private static bool dopasuj(String s)
@@ -39,7 +39,7 @@ namespace AJF_Projekt
             String[] sa = new String[tmp_list.Count];
             for (int i = 0; i < tmp_list.Count; i++) { sa[i] = tmp_list[i]; }
             NDAS_Stan[] tmp = new NDAS_Stan[sa.Length];
-            for(int i=0;i<sa.Length;i++)
+            for (int i = 0; i < sa.Length; i++)
             { tmp[i] = new NDAS_Stan(sa[i], this.automat); }
 
             return tmp;
